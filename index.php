@@ -45,13 +45,18 @@
       height: 100%;
     }
 
-    p:last-child {
+    p:last-child, .feed {
       text-align: left;
-      padding: 14px;
+      padding: 0 14px 14px;
     }
 
     .feedback {
       color: red;
+      padding-top: 8px;
+    }
+
+    .feed {
+      font-size: 12px;
     }
 
   </style>
@@ -94,9 +99,10 @@
       </h4>
 
       <p class="feedback">
+        Voto:
         <?php echo $new_movie->feedback ?>/5
       </p>
-      <p>
+      <p class="feed">
       <?php echo $new_movie->getFeedback() ?>
       </p>
 
