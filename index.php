@@ -1,9 +1,7 @@
 <?php
 
   require_once __DIR__ . "/Movie.php";
-
-  $movie = new Movie("Scream","2022","Horror/Thriller");
-  $movie->image = "./img/scream-locandina-lassassino-e-nel-poster.jpg";
+  require_once __DIR__ . "/db.php";
 
 ?>
 
@@ -15,48 +13,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
     body{
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
       background-color: grey;
     }
 
     .movie{
-      width: 150px;
+      width: 200px;
       text-align: center;
       background-color: lightgrey;
       padding-bottom: 8px;
+      margin: 24px;
     }
 
     .cover {
-      width: 150px;
+      height: 300px;
+      padding-bottom: 32px;
     }
     
     .cover img{
       width: 100%;
+      height: 100%;
     }
+
+    p:last-child {
+      text-align: left;
+      padding: 14px;
+    }
+
+    .feedback {
+      color: red;
+    }
+
   </style>
 
   <title>php-oop-1</title>
 </head>
 <body>
-  <section class="movie">
+  <?php foreach($movies as $movie): 
 
-    <div class="cover">
-      <img src="<?php echo $movie->image ?>" 
-      alt="<?php echo $movie->title ?>">
-    </div>
+    $new_movie = new Movie($movie['image'],$movie['title'],$movie['releaseYear'],$movie['duration'],$movie['genre']);
 
-    <h2>
-      <?php echo $movie->title ?>
-    </h2>
-  
-    <h4>
-      <?php echo $movie->release_year ?>
-    </h4>
-  
-    <h4>
-      <?php echo $movie->genre ?>
-    </h4>
-  </section>
+    $new_movie->feedback = $movie['feedback'];
+    $new_movie->description = $movie['description'];
+  ?>
+    <section class="movie">
+      <div class="cover">
+        <img src="<?php echo $new_movie->image ?>" 
+        alt="<?php echo $new_movie->title ?>">
+      </div>
+
+      <h2>
+        <?php echo $new_movie->title ?>
+      </h2>
+
+      <p>
+        <strong>
+          <?php echo $new_movie->releaseYear ?>
+        </strong>
+      </p>
+
+      <p>
+        Durata:
+        <strong>        
+          <?php echo $new_movie->duration ?>
+        </strong>
+      </p>
+    
+      <h4>
+        <?php echo $new_movie->genre ?>
+      </h4>
+
+      <p class="feedback">
+        <?php echo $new_movie->feedback ?>/5
+      </p>
+      <p>
+      <?php echo $new_movie->getFeedback() ?>
+      </p>
+
+      <p>
+        <?php echo $new_movie-> getDescription(60)?>
+      </p>
+
+
+    </section>
+  <?php endforeach; ?>
 
   
 </body>
