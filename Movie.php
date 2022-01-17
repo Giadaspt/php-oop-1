@@ -1,7 +1,7 @@
 <?php
 
 class Movie {
-  public $image = "./img/scream-locandina-lassassino-e-nel-poster.jpg";
+  public $image;
   public $title;
   public $release_year;
   public $duration;

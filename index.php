@@ -29,6 +29,7 @@
     .cover {
       width: 150px;
     }
+    
     .cover img{
       width: 100%;
     }
